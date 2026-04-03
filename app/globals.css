@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --igra-cyan: #00d4ff;
+  --igra-green: #22c55e;
+  --igra-amber: #f59e0b;
+  --igra-red: #ef4444;
+  --igra-bg: #060e1a;
+  --igra-surface: #0d1f35;
+  --igra-border: rgba(0, 212, 255, 0.15);
+  --igra-muted: rgba(148, 163, 184, 0.6);
+}
+
+body {
+  background: var(--igra-bg);
+  min-height: 100vh;
+}
+
+/* Scanline overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.card {
+  @apply rounded-lg border bg-[#0d1f35] p-4;
+  border-color: var(--igra-border);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.04);
+}
+
+.card-glow {
+  @apply card;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.08), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+}
+
+.label {
+  @apply text-xs font-display tracking-widest uppercase;
+  color: var(--igra-muted);
+}
+
+.value {
+  @apply font-mono text-slate-100;
+}
+
+.tag-green  { @apply rounded px-1.5 py-0.5 text-xs font-mono bg-green-900/40 text-green-400; }
+.tag-yellow { @apply rounded px-1.5 py-0.5 text-xs font-mono bg-yellow-900/40 text-yellow-400; }
+.tag-red    { @apply rounded px-1.5 py-0.5 text-xs font-mono bg-red-900/40 text-red-400; }
+.tag-cyan   { @apply rounded px-1.5 py-0.5 text-xs font-mono bg-cyan-900/40 text-cyan-400; }
+
+/* Ticker flash animation */
+@keyframes flash-green {
+  0%, 100% { color: inherit; }
+  50% { color: #22c55e; }
+}
+.flash { animation: flash-green 0.4s ease; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--igra-border); border-radius: 2px; }
